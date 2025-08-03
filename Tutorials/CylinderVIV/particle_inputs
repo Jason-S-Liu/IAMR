@@ -1,0 +1,31 @@
+# Cylinder particle configuration file
+# Format: x y z rho velocity_x velocity_y velocity_z omega_x omega_y omega_z TLX TLY TLZ RLX RLY RLZ radius
+
+# Single cylinder particle at center (array format)
+x = 0.05
+y = 0.05  
+z = 0.05
+rho = 1000.0
+velocity_x = 0.0
+velocity_y = 0.0
+velocity_z = 0.0
+omega_x = 0.0
+omega_y = 0.0
+omega_z = 0.0
+TLX = 1
+TLY = 1
+TLZ = 1
+RLX = 1
+RLY = 1
+RLZ = 1
+radius = 0.01
+
+# Additional parameters
+RD = 0.01
+LOOP_NS = 1
+LOOP_SOLID = 1
+verbose = 1
+start_step = 0
+Uhlmann = 1
+collision_model = 0
+write_freq = 100 

@@ -1,0 +1,114 @@
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#            SIMULATION STOP            #
+#.......................................#
+stop_time               =   10.0        # Max (simulated) time to evolve
+max_step                =  -1           # Max number of time steps
+
+ns.stop_when_steady     =   0           # Steady-state solver?
+ns.steady_tol           = 1.e-8
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#           SOLVER SETTINGS             #
+#.......................................#
+ns.init_shrink = 1.0                    # Multiply initial dt by this factor
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#         TIME STEP COMPUTATION         #
+#.......................................#
+ns.fixed_dt         =   -1.0            # If fixed_dt > 0, use this constant dt
+ns.cfl              =   0.45            # CFL factor
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#            INPUT AND OUTPUT           #
+#.......................................#
+amr.plot_int            =   50          # Steps between plot files
+amr.plot_per            =   0.1         # Steps between plot files
+amr.check_int           =   1000        # Steps between checkpoint files
+amr.derive_plot_vars    =   mag_vort avg_pressure # Derived quantities to include in plotfiles
+
+amr.restart             =   ""          # Checkpoint to restart from
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#               PHYSICS                 #
+#.......................................#
+ns.gravity		 =   0. 
+
+ns.vel_visc_coef         = 0.00001      # Kinematic viscosity
+ns.scal_diff_coefs       = 1.0
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#        ADAPTIVE MESH REFINEMENT       #
+#.......................................#
+amr.n_cell              =   128 64 16   # Grid cells at coarsest AMRlevel
+amr.max_level           =   2           # Max AMR level in hierarchy
+
+# Refinement criterion, use vorticity
+amr.refinement_indicators = vorticity
+amr.vorticity.vorticity_greater =  2.0
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#              GEOMETRY                 #
+#.......................................#
+geometry.prob_lo        =  -0.1 -0.05 -0.005  # Lo corner coordinates
+geometry.prob_hi        =   0.3  0.05  0.005  # Hi corner coordinates
+geometry.is_periodic    =   0   1   1   # Periodicity x y z (0/1)
+geometry.coord_sys      = 0             # 0 for Cartesian, 1 for RZ
+
+# 0 = Interior/Periodic  3 = Symmetry
+# 1 = Inflow             4 = SlipWall
+# 2 = Outflow            5 = NoSlipWal
+# Boundary conditions on the low end of the domain.
+ns.lo_bc 	     	= 1 0 0
+# Boundary conditions on the high end of the domain.
+ns.hi_bc   	     	= 2 0 0
+
+# inflow velocity
+xlo.velocity = 1. 0. 0.
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#          CYLINDER VIV PARAMETERS      #
+#.......................................#
+# Enable cylinder vibration IBM
+cylinder_viv.enabled = 1
+
+# Cylinder geometry
+cylinder_viv.shape = 0                  # 0=circular, 1=square
+cylinder_vib.radius = 0.005             # Cylinder radius
+cylinder_vib.center = 0.0 0.0 0.0       # Initial center position
+
+# Vibration type: 0=forced, 1=free, 2=VIV
+cylinder_vib.vibration_type = 2
+
+# VIV parameters
+cylinder_vib.mass_ratio = 2.0           # m/ρD²
+cylinder_vib.natural_frequency_x = 10.0 # Natural frequency in x direction
+cylinder_vib.natural_frequency_y = 10.0 # Natural frequency in y direction
+cylinder_vib.damping_ratio_x = 0.01     # Damping ratio in x direction
+cylinder_vib.damping_ratio_y = 0.01     # Damping ratio in y direction
+
+# Constraint conditions: 0=locked, 1=free, 2=vibration
+cylinder_vib.translation_lock = 0 2 0   # Lock x, free y, lock z
+cylinder_vib.rotation_lock = 0 0 0      # All rotations locked
+
+# Initial conditions
+cylinder_vib.initial_velocity = 0.0 0.0 0.0
+cylinder_vib.initial_displacement = 0.0 0.0 0.0
+
+# IBM parameters
+cylinder_vib.markers_per_circumference = 64
+cylinder_vib.delta_function_type = 0    # 0=four_point, 1=three_point
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#          PROBLEM PARAMETERS           #
+#.......................................#
+prob.probtype = 4
+prob.density_ic = 1.0
+prob.velocity_ic = 1. 0. 0.
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#              VERBOSITY                #
+#.......................................#
+ns.v                    = 1 # NS solver 
+nodal_proj.verbose      = 0 # Nodal projection
+mac_proj.verbose        = 0 # MacProjector
+diffuse.v               = 0 # Diffusion solver 

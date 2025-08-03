@@ -1,0 +1,16 @@
+ 0: amrex::BLBackTrace::print_backtrace_info(__sFILE*) (in main3d.gnu.ex) (AMReX_BLBackTrace.cpp:0)
+
+ 1: amrex::BLBackTrace::handler(int) (in main3d.gnu.ex) (AMReX_BLBackTrace.cpp:103)
+
+ 2: _sigtramp (in libsystem_platform.dylib) + 56
+
+ 3: NavierStokes::writePlotFilePost(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&, std::__1::basic_ostream<char, std::__1::char_traits<char>>&) (in main3d.gnu.ex) (NavierStokes.cpp:1167)
+
+ 4: amrex::Amr::writePlotFileDoit(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&, bool) (in main3d.gnu.ex) (AMReX_Amr.cpp:984)
+
+ 5: amrex::Amr::writePlotFile() (in main3d.gnu.ex) (AMReX_Amr.cpp:877)
+
+ 6: main (in main3d.gnu.ex) (main.cpp:138)
+
+ 7: start (in dyld) + 6076
+

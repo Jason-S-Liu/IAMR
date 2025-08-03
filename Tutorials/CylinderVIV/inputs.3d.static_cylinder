@@ -1,0 +1,78 @@
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#            SIMULATION STOP            #
+#.......................................#
+stop_time               =   5.0         # Max (simulated) time to evolve
+max_step                =  -1           # Max number of time steps
+
+ns.stop_when_steady     =   0           # Steady-state solver?
+ns.steady_tol           = 1.e-8
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#           SOLVER SETTINGS             #
+#.......................................#
+ns.init_shrink = 1.0                    # Multiply initial dt by this factor
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#         TIME STEP COMPUTATION         #
+#.......................................#
+ns.fixed_dt         =   -1.0            # If fixed_dt > 0, use this constant dt
+ns.cfl              =   0.45            # CFL factor
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#         PROBLEM PARAMETERS            #
+#.......................................#
+geometry.prob_hi    =   0.2  0.1  0.1   # Physical domain size
+geometry.prob_lo    =   0.0  0.0  0.0   # Physical domain size
+geometry.coord_sys  =   0                # Coordinate system (0=cartesian)
+geometry.is_periodic =  0 0 0            # Periodic boundary conditions
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#         GRID PARAMETERS               #
+#.......................................#
+amr.n_cell          =   64  32  32      # Number of cells in each direction
+amr.max_level       =   0                # Maximum refinement level
+amr.blocking_factor =   8                # Blocking factor for grid generation
+amr.max_grid_size   =   16               # Maximum grid size
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#         BOUNDARY CONDITIONS           #
+#.......................................#
+ns.lo_bc            =   3   2   2        # Boundary conditions at low end
+ns.hi_bc            =   2   2   2        # Boundary conditions at high end
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#         PHYSICS PARAMETERS            #
+#.......................................#
+ns.vel_visc_coef    =   0.00001          # Kinematic viscosity (Re=100 for D=0.02, U=1.0)
+ns.scal_diff_coefs  =   0.0              # Scalar diffusion coefficients
+ns.gravity          =   0.0  0.0  0.0    # Gravity vector
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#         PROBLEM PARAMETERS            #
+#.......................................#
+prob.probtype       =   97                # Problem type (97 for custom/user-defined)
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#         CYLINDER VIBRATION PARAMS     #
+#.......................................#
+cylinder_vib.shape  =   0                # 0=circular, 1=square
+cylinder_vib.radius =   0.01             # Cylinder radius (D=0.02)
+cylinder_vib.center =   0.05  0.05  0.05 # Cylinder center position
+cylinder_vib.vibration_type = 0          # 0=static, 1=forced, 2=free, 3=VIV
+cylinder_vib.mass_ratio = 2.0            # Mass ratio for VIV
+cylinder_vib.natural_frequency_x = 10.0  # Natural frequency in x direction
+cylinder_vib.natural_frequency_y = 10.0  # Natural frequency in y direction
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#         OUTPUT PARAMETERS             #
+#.......................................#
+amr.plot_int        =   -1              # Plot file output frequency (disabled)
+amr.check_int       =   1000             # Checkpoint file output frequency
+amr.plot_file       =   plt              # Plot file name
+amr.check_file      =   chk              # Checkpoint file name
+
+#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#         VERBOSITY                     #
+#.......................................#
+amr.v               =   1                # AMReX verbosity
+ns.v                =   1                # NavierStokes verbosity 

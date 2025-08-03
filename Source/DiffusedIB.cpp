@@ -1139,7 +1139,7 @@ void Particles::Initialize()
 
     std::string particle_inputfile;
     std::string particle_init_file;
-    pp.get("input",particle_inputfile);
+    pp.query("input",particle_inputfile);
     
     if(!particle_inputfile.empty()){
         ParmParse p_file(particle_inputfile);
@@ -1212,7 +1212,7 @@ void Particles::Initialize()
         }
 
     }else {
-        amrex::Abort("[Particle] : can't read particles settings, pls check your config file \"particle.input\"");
+        amrex::Print() << "[Particle] : No particle.input specified, skipping particle initialization\n";
     }
 }
 

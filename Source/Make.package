@@ -49,4 +49,8 @@ ifeq ($(USE_PARTICLES), TRUE)
 
   CEXE_sources += Collision.cpp
   CEXE_headers += Collision.H
+
+  # Add CylinderVibrationIBM support
+  CEXE_sources += CylinderVibrationIBM.cpp
+  CEXE_headers += CylinderVibrationIBM.H
 endif
